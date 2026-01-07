@@ -27,3 +27,14 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Node.js ###
+frontend/node_modules/
+frontend/.next/
+frontend/.env*.local
+frontend/*.log
+
+### Database ###
+frontend/prisma/*.db
+frontend/prisma/*.db-journal
+frontend/dev.db
