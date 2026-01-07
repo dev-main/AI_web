@@ -11,17 +11,19 @@ datasource db {
 }
 
 model FocusSession {
-  id          String    @id @default(cuid())
-  appName     String
-  windowTitle String?
-  startTime   DateTime  @default(now())
-  endTime     DateTime?
-  duration    Int       @default(0) // in seconds
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id             String    @id @default(cuid())
+  appName        String
+  windowTitle    String?
+  startTime      DateTime  @default(now())
+  endTime        DateTime?
+  duration       Int       @default(0) // in seconds
+  screenshotPath String?   // Path to screenshot file
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   @@index([appName])
   @@index([startTime])
+  @@index([createdAt])
 }
 
 model TrackerState {

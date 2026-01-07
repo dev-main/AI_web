@@ -1,5 +1,6 @@
 import { prisma } from './prisma'
 import { getActiveApp } from './applescript'
+import { captureActiveWindow } from './screenshot'
 
 export class FocusTracker {
   private intervalId: NodeJS.Timeout | null = null
@@ -80,12 +81,16 @@ export class FocusTracker {
   }
 
   private async startSession(app: any): Promise<string> {
+    // Capture screenshot on app switch
+    const screenshot = await captureActiveWindow(app.appName)
+
     const session = await prisma.focusSession.create({
       data: {
         appName: app.appName,
         windowTitle: app.windowTitle,
         startTime: app.timestamp,
-        duration: 0
+        duration: 0,
+        screenshotPath: screenshot.success ? screenshot.filePath : null
       }
     })
 

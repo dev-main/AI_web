@@ -1,6 +1,7 @@
 import { LiveStatus } from '@/components/dashboard/LiveStatus'
 import { DailyBreakdown } from '@/components/dashboard/DailyBreakdown'
 import { TimelineChart } from '@/components/dashboard/TimelineChart'
+import { ScreenshotTimeline } from '@/components/dashboard/ScreenshotTimeline'
 
 export default function DashboardPage() {
   return (
@@ -11,6 +12,8 @@ export default function DashboardPage() {
         <DailyBreakdown />
         <TimelineChart />
       </div>
+
+      <ScreenshotTimeline />
     </div>
   )
 }

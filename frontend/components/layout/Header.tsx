@@ -12,6 +12,24 @@ export function Header() {
     fetchStatus()
   }, [])
 
+  // Cleanup automation - run once per day
+  useEffect(() => {
+    const runCleanup = async () => {
+      try {
+        await fetch('/api/screenshots/cleanup', { method: 'POST' })
+      } catch (error) {
+        console.error('Cleanup failed:', error)
+      }
+    }
+
+    // Run immediately on mount
+    runCleanup()
+
+    // Then run every 24 hours
+    const interval = setInterval(runCleanup, 24 * 60 * 60 * 1000)
+    return () => clearInterval(interval)
+  }, [])
+
   const fetchStatus = async () => {
     const res = await fetch('/api/tracker/status')
     const data = await res.json()
